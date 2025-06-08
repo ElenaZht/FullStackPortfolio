@@ -2,6 +2,7 @@ import './App.css'
 import HomeSection from './sections/HomeSection'
 import ProjectsSection from './sections/ProjectsSection'
 import AboutMeSection from './sections/AboutMeSection'
+import ContactsSection from './sections/ContactsSection'
 
 function App() {
 
@@ -10,6 +11,7 @@ function App() {
       <HomeSection/>
       <ProjectsSection/>
       <AboutMeSection/>
+      <ContactsSection/>
     </>
   )
 }
