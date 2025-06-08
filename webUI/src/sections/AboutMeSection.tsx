@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import myPhoto from '../assets/my_photo.jpeg'
 
 export default function AboutMeSection() {
   const [isContactPressed, setIsContactPressed] = useState(false)
@@ -73,25 +74,13 @@ export default function AboutMeSection() {
           {/* Right side - Portrait */}
           <div className="order-2 lg:order-2">
             <div className="relative max-w-lg mx-auto">
-              {/* Placeholder for portrait - you can replace with actual image */}
-              <div className="w-full h-96 lg:h-[500px] bg-secondary rounded-2xl shadow-lg flex items-center justify-center border-4 border-primary/20">
-                <div className="text-center">
-                  <div className="w-32 h-32 bg-primary/20 rounded-full mx-auto mb-4 flex items-center justify-center">
-                    <svg 
-                      className="w-16 h-16 text-primary" 
-                      fill="currentColor" 
-                      viewBox="0 0 20 20"
-                    >
-                      <path 
-                        fillRule="evenodd" 
-                        d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" 
-                        clipRule="evenodd" 
-                      />
-                    </svg>
-                  </div>
-                  <p className="text-dark font-medium">Portrait Photo</p>
-                  <p className="text-sm text-neutral">Coming Soon</p>
-                </div>
+              {/* Your Photo */}
+              <div className="w-full h-96 lg:h-[500px] xl:h-[600px] overflow-hidden">
+                <img 
+                  src={myPhoto} 
+                  alt="Elena Zhytomirski - Full Stack Developer"
+                  className="w-full h-full object-cover"
+                />
               </div>
               
               {/* Decorative elements */}
