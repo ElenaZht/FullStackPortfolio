@@ -11,6 +11,17 @@ export default function AboutMeSection() {
     setIsContactPressed(false)
   }
 
+  const handleContactClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault()
+    const element = document.getElementById('contact')
+    if (element) {
+      element.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      })
+    }
+  }
+
   return (
     <div id="about" className="bg-white py-16 px-4">
       <div className="max-w-7xl mx-auto">
@@ -48,6 +59,7 @@ export default function AboutMeSection() {
                 borderColor: isContactPressed ? '#00e054' : '#00ff62',
                 color: isContactPressed ? '#ffffff' : '#1f2937'
               }}
+              onClick={handleContactClick}
               onMouseDown={handleContactMouseDown}
               onMouseUp={handleContactMouseUp}
               onMouseLeave={handleContactMouseUp}

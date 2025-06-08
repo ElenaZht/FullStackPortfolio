@@ -12,23 +12,51 @@ export default function NavBar() {
     setIsMenuOpen(false)
   }
 
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
+    e.preventDefault()
+    const element = document.getElementById(targetId)
+    if (element) {
+      element.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      })
+    }
+    closeMenu() // Close mobile menu if open
+  }
+
   return (
     <div className="navbar-container fixed top-0 left-0 w-full bg-secondary px-4 lg:px-8 py-6 z-50">
       <div className="flex items-center justify-between w-full max-w-full min-w-0">
         {/* Logo section */}
-        <a href="#home" className="text-2xl lg:text-3xl font-bold text-dark hover:text-primary transition-colors cursor-pointer flex-shrink-0">
+        <a 
+          href="#home" 
+          className="text-2xl lg:text-3xl font-bold text-dark hover:text-primary transition-colors cursor-pointer flex-shrink-0"
+          onClick={(e) => handleNavClick(e, 'home')}
+        >
           EZ
         </a>
 
         {/* Desktop menu */}
         <div className="hidden lg:flex items-center space-x-8 flex-shrink-0">
-          <a href="#projects" className="text-lg text-dark hover:text-primary transition-colors py-2 px-4 whitespace-nowrap">
+          <a 
+            href="#projects" 
+            className="text-lg text-dark hover:text-primary transition-colors py-2 px-4 whitespace-nowrap"
+            onClick={(e) => handleNavClick(e, 'projects')}
+          >
             Projects
           </a>
-          <a href="#about" className="text-lg text-dark hover:text-primary transition-colors py-2 px-4 whitespace-nowrap">
+          <a 
+            href="#about" 
+            className="text-lg text-dark hover:text-primary transition-colors py-2 px-4 whitespace-nowrap"
+            onClick={(e) => handleNavClick(e, 'about')}
+          >
             About
           </a>
-          <a href="#contact" className="text-lg text-dark hover:text-primary transition-colors py-2 px-4 whitespace-nowrap">
+          <a 
+            href="#contact" 
+            className="text-lg text-dark hover:text-primary transition-colors py-2 px-4 whitespace-nowrap"
+            onClick={(e) => handleNavClick(e, 'contact')}
+          >
             Contact
           </a>
           <CvDownloadButton />
@@ -68,8 +96,8 @@ export default function NavBar() {
                 <li>
                   <a 
                     href="#projects" 
-                    className="text-lg text-dark transition-colors py-3 px-4 active:bg-gray-100" 
-                    onClick={closeMenu}
+                    className="text-lg text-dark transition-colors py-3 px-4 active:bg-gray-100"
+                    onClick={(e) => handleNavClick(e, 'projects')}
                   >
                     Projects
                   </a>
@@ -77,8 +105,8 @@ export default function NavBar() {
                 <li>
                   <a 
                     href="#about" 
-                    className="text-lg text-dark transition-colors py-3 px-4 active:bg-gray-100" 
-                    onClick={closeMenu}
+                    className="text-lg text-dark transition-colors py-3 px-4 active:bg-gray-100"
+                    onClick={(e) => handleNavClick(e, 'about')}
                   >
                     About
                   </a>
@@ -86,8 +114,8 @@ export default function NavBar() {
                 <li>
                   <a 
                     href="#contact" 
-                    className="text-lg text-dark transition-colors py-3 px-4 active:bg-gray-100" 
-                    onClick={closeMenu}
+                    className="text-lg text-dark transition-colors py-3 px-4 active:bg-gray-100"
+                    onClick={(e) => handleNavClick(e, 'contact')}
                   >
                     Contact
                   </a>

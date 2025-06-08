@@ -2,6 +2,17 @@ import React from 'react';
 import { Github, Linkedin, Mail } from 'lucide-react';
 
 const Footer: React.FC = () => {
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
+    e.preventDefault()
+    const element = document.getElementById(targetId)
+    if (element) {
+      element.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      })
+    }
+  }
+
   return (
     <footer className="bg-dark py-12 px-4">
       <div className="max-w-7xl mx-auto">
@@ -18,18 +29,21 @@ const Footer: React.FC = () => {
             <a 
               href="#projects" 
               className="text-gray-300 hover:text-primary transition-colors duration-300 text-sm md:text-base"
+              onClick={(e) => handleNavClick(e, 'projects')}
             >
               Projects
             </a>
             <a 
               href="#about" 
               className="text-gray-300 hover:text-primary transition-colors duration-300 text-sm md:text-base"
+              onClick={(e) => handleNavClick(e, 'about')}
             >
               About Me
             </a>
             <a 
               href="#contact" 
               className="text-gray-300 hover:text-primary transition-colors duration-300 text-sm md:text-base"
+              onClick={(e) => handleNavClick(e, 'contact')}
             >
               Contacts
             </a>

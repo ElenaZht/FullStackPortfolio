@@ -13,6 +13,17 @@ export default function HomeSection() {
     setIsViewProjectsPressed(false)
   }
 
+  const handleViewProjectsClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault()
+    const element = document.getElementById('projects')
+    if (element) {
+      element.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      })
+    }
+  }
+
   return (
     <div id="home" className="min-h-screen bg-gradient-to-b from-secondary to-white">
       <NavBar/>
@@ -58,6 +69,7 @@ export default function HomeSection() {
                     borderColor: isViewProjectsPressed ? '#00e054' : '#00ff62',
                     color: isViewProjectsPressed ? '#ffffff' : '#1f2937'
                   }}
+                  onClick={handleViewProjectsClick}
                   onMouseDown={handleViewProjectsMouseDown}
                   onMouseUp={handleViewProjectsMouseUp}
                   onMouseLeave={handleViewProjectsMouseUp}
