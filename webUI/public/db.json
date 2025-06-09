@@ -1,0 +1,86 @@
+{
+  "projects": [
+    {
+      "id": 1,
+      "title": "NeighborNet",
+      "stack": [
+        "React", 
+        "Node.js",
+        "Google APIs",
+        "JavaScript",
+        "Redux",  
+        "Express", 
+        "PostgreSQL", 
+        "JWT", 
+        "Tailwind CSS"
+      ],
+      "description": "A full-stack community app designed to foster neighborhood collaboration and mutual support.",
+      "longDescription": "NeighborNet is a community-focused web application that empowers neighbors to connect, collaborate, and support one another. Users can share resources, report local issues, request or offer help, and stay informed about neighborhood activity. Built with a modern React frontend and a robust Node.js/Express backend, the app integrates the Google Places API for location-based features and uses PostgreSQL via Neon for data management. Media uploads are handled through Cloudinary, and the app is hosted on Render.com.",
+      "screenshots": [
+        "/assets/screenshots/nbr_main.png",
+        "/assets/screenshots/nbr_1.png",
+        "/assets/screenshots/nbr_2.png",
+        "/assets/screenshots/nbr_3.png",
+        "/assets/screenshots/nbr_4.png",
+        "/assets/screenshots/nbr_6.png"
+        
+      ],
+      "features": [
+        "User Authentication - Secure signup/login system",
+        "Neighborhood-based Filtering - View content by neighborhood, city, or country",
+        "Real-time Feed - Dynamic community updates",
+        "Interactive Maps - Location-based reporting with Google Maps integration",
+        "Status Management - Track report progress (Active, In Progress, Resolved)",
+        "Follow System - Subscribe to reports for updates"
+      ],
+      "links": {
+        "github": "https://github.com/ElenaZht/NeighborNet/tree/main",
+        "live": "https://neighbornet.onrender.com"
+      },
+      "status": "mvp",
+      "createdAt": "2025-05",
+      "updatedAt": ""
+    },
+        {
+      "id": 2,
+      "title": "Weather",
+      "stack": [
+        "React", 
+        "OpenWeather API",
+        "Google API",
+        "News API",
+        "JavaScript",
+        "RxJs"
+      ],
+      "description": "Serverless application for monitoring current weather and latest news",
+      "longDescription": "",
+      "screenshots": [
+        "/assets/screenshots/weather_main.png",
+        "/assets/screenshots/211.png",
+        "/assets/screenshots/213.png",
+        "/assets/screenshots/215.png",
+        "/assets/screenshots/216.png",
+        "/assets/screenshots/217.png",
+        "/assets/screenshots/218.png",
+        "/assets/screenshots/220.png",
+        "/assets/screenshots/221.png",
+        "/assets/screenshots/222.png"
+      ],
+      "features": [
+        "Current weather, world news, and local news for various countries",
+        "Search and save regions of your interest",
+        "Automatically  recognize your  region",
+        "Authorization with google account",
+        "Automatically adjust theme to the time of day",
+        "Serverless application that uses localStorage"
+      ],
+      "links": {
+        "github": "https://github.com/ElenaZht/Weather",
+        "live": ""
+      },
+      "status": "mvp",
+      "createdAt": "2023-09",
+      "updatedAt": "2025-03"
+    }
+  ]
+}

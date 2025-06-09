@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import myPhoto from '../assets/my_photo.jpeg'
 
 export default function AboutMeSection() {
   const [isContactPressed, setIsContactPressed] = useState(false)
@@ -77,7 +76,7 @@ export default function AboutMeSection() {
               {/* Your Photo */}
               <div className="w-full h-96 lg:h-[500px] xl:h-[600px] overflow-hidden">
                 <img 
-                  src={myPhoto} 
+                  src="/assets/my_photo.jpeg" 
                   alt="Elena Zhytomirski - Full Stack Developer"
                   className="w-full h-full object-cover"
                 />
