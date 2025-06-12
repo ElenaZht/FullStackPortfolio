@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Mail, Phone, Github, Linkedin } from 'lucide-react';
-import emailjs from '@emailjs/browser';
 
 const ContactsSection: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -25,30 +24,32 @@ const ContactsSection: React.FC = () => {
     setSubmitStatus('idle');
 
     try {
-      const templateParams = {
-        from_name: formData.name,
-        from_email: formData.email,
-        message: formData.message,
-        to_email: 'elenazht@gmail.com'
-      };
+      const response = await fetch('https://formspree.io/f/xjkrwrqj', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+          _subject: `Portfolio Contact from ${formData.name}`,
+        }),
+      });
 
-      // limit 200 letters / month
-    //   await emailjs.send(
-    //     import.meta.env.VITE_EMAILJS_SERVICE_ID,
-    //     import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-    //     templateParams,
-    //     import.meta.env.VITE_EMAILJS_PUBLIC_KEY
-    //   );
-
-      setSubmitStatus('success');
-      setFormData({ name: '', email: '', message: '' }); // Reset form
-
+      if (response.ok) {
+        setSubmitStatus('success');
+        setFormData({ name: '', email: '', message: '' });
+      } else {
+        setSubmitStatus('error');
+      }
     } catch (error) {
-      console.error('Email send failed:', error);
+      console.error('Error submitting form:', error);
       setSubmitStatus('error');
-
     } finally {
       setIsSubmitting(false);
+      // Auto-hide status after 5 seconds
+      setTimeout(() => setSubmitStatus('idle'), 5000);
     }
   };
 
@@ -92,12 +93,13 @@ const ContactsSection: React.FC = () => {
             {/* Status Messages */}
             {submitStatus === 'success' && (
               <div className="mb-6 p-4 bg-green-100 border border-green-400 text-green-700 rounded-lg">
-                Thank you! Your message has been sent successfully.
+                ✅ Message sent successfully! I'll get back to you soon.
               </div>
             )}
+            
             {submitStatus === 'error' && (
               <div className="mb-6 p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg">
-                Sorry, there was an error sending your message. Please try again.
+                ❌ Failed to send message. Please try again or contact me directly.
               </div>
             )}
 
@@ -113,7 +115,8 @@ const ContactsSection: React.FC = () => {
                   value={formData.name}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-primary focus:outline-none transition-colors duration-200 bg-white text-dark"
+                  disabled={isSubmitting}
+                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-primary focus:outline-none transition-colors duration-200 bg-white text-dark disabled:opacity-50 disabled:cursor-not-allowed"
                   placeholder="Your name"
                 />
               </div>
@@ -129,7 +132,8 @@ const ContactsSection: React.FC = () => {
                   value={formData.email}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-primary focus:outline-none transition-colors duration-200 bg-white text-dark"
+                  disabled={isSubmitting}
+                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-primary focus:outline-none transition-colors duration-200 bg-white text-dark disabled:opacity-50 disabled:cursor-not-allowed"
                   placeholder="your.email@example.com"
                 />
               </div>
@@ -144,8 +148,9 @@ const ContactsSection: React.FC = () => {
                   value={formData.message}
                   onChange={handleInputChange}
                   required
+                  disabled={isSubmitting}
                   rows={5}
-                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-primary focus:outline-none transition-colors duration-200 resize-vertical bg-white text-dark"
+                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-primary focus:outline-none transition-colors duration-200 resize-vertical bg-white text-dark disabled:opacity-50 disabled:cursor-not-allowed"
                   placeholder="Your message here..."
                 />
               </div>
@@ -153,20 +158,23 @@ const ContactsSection: React.FC = () => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className={`w-full py-3 px-6 rounded-lg font-medium text-lg shadow-md transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-green-300 relative overflow-hidden group ${
-                  isSubmitting 
-                    ? 'bg-gray-400 cursor-not-allowed' 
-                    : 'bg-green-500 text-white hover:bg-green-600 active:bg-green-700 hover:shadow-xl transform hover:scale-105 active:scale-95'
-                }`}
+                className="w-full py-3 px-6 rounded-lg font-medium text-lg shadow-md transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-green-300 relative overflow-hidden group bg-green-500 text-white hover:bg-green-600 active:bg-green-700 hover:shadow-xl transform hover:scale-105 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none disabled:hover:bg-green-500"
               >
                 <span className="relative z-10">
-                  {isSubmitting ? 'Sending...' : 'Send Message'}
+                  {isSubmitting ? (
+                    <span className="flex items-center justify-center">
+                      <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                      Sending...
+                    </span>
+                  ) : (
+                    'Send Message'
+                  )}
                 </span>
                 {!isSubmitting && (
-                  <>
-                    <div className="absolute inset-0 bg-gradient-to-r from-green-400 to-green-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <div className="absolute inset-0 bg-white opacity-0 group-active:opacity-20 transition-opacity duration-150"></div>
-                  </>
+                  <div className="absolute inset-0 bg-gradient-to-r from-green-400 to-green-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 )}
               </button>
             </form>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import SmallProjectCard from '../components/SmallProjectCard'
 import BigProjectCard from '../components/BigProjectCard'
 

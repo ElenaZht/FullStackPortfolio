@@ -1,5 +1,3 @@
-import React from 'react'
-
 export default function CvDownloadButton() {
   const handleDownloadCV = () => {    
     const link = document.createElement('a')

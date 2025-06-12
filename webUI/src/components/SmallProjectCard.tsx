@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 interface ProjectData {
   name: string
@@ -52,6 +52,19 @@ export default function SmallProjectCard({ project, onSeeMore }: SmallProjectCar
                   className="text-primary hover:text-green-600 text-sm font-medium transition-colors duration-200"
                 >
                   Live
+                </a>
+              </>
+            )}
+            {project.links.github && (
+              <>
+                <span className="text-gray-400">|</span>
+                <a
+                  href={project.links.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-dark hover:text-gray-600 text-sm font-medium transition-colors duration-200"
+                >
+                  GitHub
                 </a>
               </>
             )}
