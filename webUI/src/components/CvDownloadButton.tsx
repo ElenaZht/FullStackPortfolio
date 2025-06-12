@@ -1,7 +1,14 @@
 export default function CvDownloadButton() {
   const handleDownloadCV = () => {    
+    const googleDocId = import.meta.env.VITE_GOOGLE_DOC_ID
+    
+    if (!googleDocId) {
+      console.error('Google Doc ID not found')
+      return
+    }
+    
     const link = document.createElement('a')
-    link.href = '/Elena_Zhytomirski_FullStack_CV (1).pdf'
+    link.href = `https://docs.google.com/document/d/${googleDocId}/export?format=pdf`
     link.download = 'Elena_Zhytomirski_FullStack_CV.pdf'
     link.target = '_blank'
     document.body.appendChild(link)
